@@ -4,6 +4,6 @@ home
 
 % Stepfunction 
 
-u_ = [-3, -1, 0, 4]
+u_ = [-3, -1, 0, 4];
 
-u_s = size(u_);
+u_s = sigma_(u_)

@@ -1,26 +1,23 @@
 clear
 close all
 home
-
-% Global variables
-i = 50; % index of an array with numbers
-z = 100; % lenght of zero array
+% Learn how to work with arrays
 
 % PART A ===============================
 % The vector A with first 50 natural digits 
-a_ = zeros([1 i]); % array prealocation 
-for a = 1:i
-    a_(1, a) = a;
-end
-% show created array A
-a_
+a_ = 1:50
 
 %================================
 % Reversed vector B
 b_ = fliplr(a_)
 
 % Array of all zeros, lenght is 100 elements
-c_ = zeros([1 z])
+c_ = zeros(1, 100);
 
 % PART B =========================
-% c
+% collect all array in one
+d_ = [a_, b_, c_];
+
+d_size = size(d_)
+
+d_short = d_(1:d_size(2)-50)

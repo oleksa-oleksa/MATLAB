@@ -1,8 +1,0 @@
-function y = sigma_(u_) 
-if ~isvector(u_)
-    error('Input must be a vector')
-end
-
-for 1:size
-y = sum(x)/length(x); 
-end
