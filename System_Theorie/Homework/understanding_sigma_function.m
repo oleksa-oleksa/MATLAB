@@ -8,7 +8,7 @@ home
 %= PLOT SETTINGS ==
 t_start = -5;
 dt = 0.001;
-t_end = 5;
+t_end = 15;
 t = t_start : dt : t_end;
 %= END
 
@@ -29,10 +29,15 @@ t = t_start : dt : t_end;
 
 % negative amplitude - mirror function understanding
 %signal_with_sigma = sigma_(-2-t); % same as t-(-2) => t+2
-signal_with_sigma = sigma_(-2-t);
+%signal_with_sigma = sigma_(-2-t);
 %signal_with_sigma = sigma_(-(t-3));
+
+% test for a12
+%signal_with_sigma = (t).*sigma_(t-3)
+
+signal_with_sigma = 3*(sigma_(t)-sigma_(t-2));
 
 
 plot(t, signal_with_sigma, 'Linewidth', 2);
 xlabel('Amplitude'), ylabel('Time'), title('Signal'), grid on
-axis([t_start t_end -5 5])
+axis([t_start t_end -15 15])
