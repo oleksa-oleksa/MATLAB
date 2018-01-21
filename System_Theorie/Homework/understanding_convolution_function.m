@@ -18,8 +18,13 @@ T1 = 2;
 T2 = 7;
 
 %s1 = (3*t)/4;
-s1 = 2*(sigma_(t)-sigma_(t-T1));
-s2 = 1/2 * sigma_(t).*exp(-t/2);
+%s1 = sigma_(t)-sigma_(t-T1);
+%s2 = 1/2 * sigma_(t).*exp(-t/2);
+
+% Exam Training
+s1 = sigma_(t)-sigma_(t-T1);
+s2 = 0.5*sigma_(t-1) + 0.5*sigma_(t-2) - sigma_(t-3)
+
 y_t = dt*conv(s1, s2);
 
 

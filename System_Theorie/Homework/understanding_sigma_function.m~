@@ -30,7 +30,7 @@ t = t_start : dt : t_end;
 % negative amplitude - mirror function understanding
 %signal_with_sigma = sigma_(-2-t); % same as t-(-2) => t+2
 %signal_with_sigma = sigma_(-2-t);
-signal_with_sigma = sigma_(-(t-3));
+%signal_with_sigma = sigma_(-(t-3));
 
 % test for a12
 %signal_with_sigma = (t).*sigma_(t-3)
@@ -38,7 +38,7 @@ signal_with_sigma = sigma_(-(t-3));
 %signal_with_sigma = 3*(sigma_(t)-sigma_(t-2));
 
 % exam training
-%signal_with_sigma = 0.5*sigma_(t-1) + 0.5*sigma_(t-2) - sigma_(t-3)
+signal_with_sigma = sigma
 
 
 plot(t, signal_with_sigma, 'Linewidth', 2);
