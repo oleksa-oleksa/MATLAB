@@ -8,7 +8,7 @@ home
 %= PLOT SETTINGS ==
 t_start = -5;
 dt = 0.001;
-t_end = 5;
+t_end = 10;
 t = t_start : dt : t_end;
 t2 = 2*t_start : dt : 2*t_end;
 %= END
@@ -22,10 +22,14 @@ T2 = 7;
 %s2 = 1/2 * sigma_(t).*exp(-t/2);
 
 % Exam Training
-s1 = sigma_(t)-sigma_(t-T1);
-s2 = 0.5*sigma_(t-1) + 0.5*sigma_(t-2) - sigma_(t-3)
+%s1 = 1*(sigma_(t) - sigma_(t-1));
+%s2 = 2*(sigma_(t) - sigma_(t-2));
+%y_t = dt*conv(s1, s2);
 
+s1 = sigma_(t) - sigma_(t - 1);
+s2 = 0.5 * sigma_(t-1) + 0.5 * sigma_(t-2) - sigma_(t-3);
 y_t = dt*conv(s1, s2);
+
 
 
 plot(t, s1, 'Linewidth', 2);
