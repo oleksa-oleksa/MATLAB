@@ -14,7 +14,6 @@ dem = [T 1 0] % Ts^2 + s in Nenner
 
 Y_s = tf(num, dem)
 step(Y_s);
-xlabel('Time'), ylabel('Amplitude'), title('Signal'), grid on
 
 % Generate logarithmically spaced vector
 % y = logspace(a,b,n) generates n points 
@@ -24,3 +23,6 @@ w = logspace(-2, 2, 200);
 bode(Y_s, w)
 grid minor
 title ('Frequency')
+xlabel('Time'), ylabel('Amplitude') 
+grid on
+
