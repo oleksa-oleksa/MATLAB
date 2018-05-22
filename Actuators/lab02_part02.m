@@ -10,28 +10,57 @@ close all
 
 %%%%%%%%%%%%%%%%%%%%
 % Einstellbare Werte 
-%     -> Frequency
-%     entspricht x-Werte
-
+%%%%%%%%%%%%%%%%%%%%%   
+voltage = [1.00 1.10 1.21 1.36 1.64 1.72 2.15 2.56 3.03 3.53 4.04 4.52 5.06];
 
 %%%%%%%%%%%%%%%%%%%%
 % Gemessene und berechnete Werte
-% %%%%%%%%%%%%%%%%%%%%
-    
-[ alpha_01, X ] = leastSquares(xAchs, yAhcs);
-kennlinie = alpha_01 + X .* xAchs;
+%%%%%%%%%%%%%%%%%%%%%
+current = [0.038 0.039 0.039 0.039 0.039 0.040 0.040 0.040 0.041 0.041 0.042 0.042 0.043];
+
+increments = [6 8 10 10 12 12 17 23 27 33 40 46 52];
+
+omega = increments*pi;
+
+km = 22.46*1e-3;
+kmi = current.*km;
+
+[intercept, slope] = leastSquares(omega, kmi);
+kennlinie = slope * omega + intercept;
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Export the result in Latex:
+export_value = slope*1e7;
+fid=fopen('task02_result.tex','wt');
+fprintf(fid, "$%.2f", export_value);
+fprintf(fid, "* 10^{-7}$ Nms");
+fclose(fid);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Plot:
+figure(1)
+plot(omega, kmi, 'or', 'linewidth', 2)
+hold on
+plot(omega, kennlinie, 'b', 'linewidth', 2)
+grid on
+title( 'Kennlinie: Reibungskonstante' )
+xlabel( 'omega [1/s]' )
+ylabel( 'kmi [mNA]' )
+saveas(gcf,'task02.png')
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Creating table for the Latex Protocol
-Table = [frequencies; dt; phi_grad]
+Table = [voltage; current; omega];
  % save LaTex code as file 
-fid=fopen('task01.tex','wt'); 
-Table_t = transpose(Table)
+fid=fopen('task02.tex','wt'); 
+Table_t = transpose(Table);
 [nrows,ncols] = size(Table_t); 
 fprintf(fid, "\\begin{tabular}{ |c|c|c| }\n");
 fprintf(fid, "\\hline\n");
-fprintf(fid, 'f [kHz] & Delta t [microsec]] & Winkel [grad] \\\\ \n');
+fprintf(fid, 'U [V] & i [A] & omega [1/s] \\\\ \n');
 fprintf(fid, '\\hline\n');
 for r = 1:nrows
    row_strs = strings(1, ncols);
@@ -48,21 +77,3 @@ fprintf(fid, "\\end{tabular}\n");
 fprintf(fid, '%%\n');
 fclose(fid);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-fprintf( 'Gesuchte Wert:: ')
-L_ber;
-fprintf( '\n' )
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Plot:
-% Motorkennlinie: 
-% Drehmoment ueber Motorstrom
-figure(1)
-plot(frequencies, phi_grad, 'or', 'linewidth', 2)
-hold on
-plot(frequencies, kennlinie, 'b', 'linewidth', 2)
-title( 'Kennlinie: Phasenverschiebung' )
-xlabel( 'Frequenz [kHz]' )
-ylabel( 'Winkel(deg) [Grad]' )
-saveas(gcf,'task01.png')
-
