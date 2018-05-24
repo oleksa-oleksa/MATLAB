@@ -37,7 +37,7 @@ L = tan(phi).*Rges./(omega);
 L_mean = sum(L)/length(L);
 
 L_new = tan(phi).*Rges./omega;
-b = regress(L_new', [ones(size(freq')), freq'])
+b = regress(L_new', [ones(size(omega')), omega'])
 
 [intercept, slope] = leastSquares(freq, phi_grad);
 kennlinie = intercept + slope .* freq;
