@@ -4,22 +4,30 @@ home
 clear
 close all
 
+% Case 1
+% s = tf('s') to specify a TF model 
+% using a rational function in the Laplace variable, s
 s = tf('s')
-G1 = 1 / (1 + 0.2*s);
+Gs = 1 / (1 + 0.2*s);
 
+% Case 2
 Gm = 1;
 Gr = 10;
 
-Gges1 = G1 * Gr / (1 + G1 * Gr * Gm)
+Gges1 = Gs * Gr / (1 + Gs * Gr * Gm)
 
 figure(1)
-step(G1, Gges1)
+step(Gs, Gges1)
 grid on
 
 % Regler ist nun Intergrator
 Grr = 10 / s
-Gges2 = G1 * Grr / (1 + G1 * Grr * Gm)
+Gges2 = Gs * Grr / (1 + Gs * Grr * Gm)
 
 figure(2)
-step(G1, Gges1, Gges2)
+step(Gs, Gges1, Gges2)
 grid on
+
+% Reglerfehler bestimmen:
+W = 1 / s;
+E = (1 / (1 + Gr*Gs*Gm)) * W
