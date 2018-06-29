@@ -8,7 +8,7 @@
 
 % Wie groß ist dann die Einstellzeit für das Erreichen des 5%-Bandes?
 
-Mp = 0.4; % (20%)
+Mp = 0.2; % (20%)
 Trise = 0.02; %s
 
 % d - ? phi - ? w_c - ? Tset - ?
